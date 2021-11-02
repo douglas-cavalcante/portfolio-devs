@@ -27,7 +27,7 @@ class Home extends React.Component {
     console.log(text);
 
     const resultFilter = this.listData.filter((dev) => {
-      return dev.name.toLowerCase().includes(text.toLowerCase());
+      return dev.name.includes(text);
     });
 
     this.setState({ devsList: resultFilter });
@@ -69,6 +69,32 @@ class Home extends React.Component {
     console.log("render");
     return (
       <>
+
+        <table>
+          <thead>
+            <tr>
+              <td>Cliente</td>
+              <td>Dados confirmados</td>
+              <td>reunião agendada</td>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            {
+              this.state.devsList.map(item => (
+                <tr>
+                  <td>{item.name}</td>
+                  <td>{item.expertise}</td>
+                  <td>12:00</td>
+                </tr>
+              ))
+            }
+
+
+          </tbody>
+        </table>
+
         {/* Header */}
         <Header title="DEVS">
           <Link to="/register">

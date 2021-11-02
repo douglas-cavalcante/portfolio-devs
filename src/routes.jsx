@@ -1,7 +1,8 @@
-import { Component } from "react";
 import Home from "./pages/Home";
 import Perfil from "./pages/Perfil";
 import Register from "./pages/Register";
+import Teste from './pages/Teste';
+
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 const Router = () => {
@@ -11,6 +12,8 @@ const Router = () => {
         <Route path="/perfil" component={Perfil} />
 
         <Route path="/register" children={(props) => <Register {...props} />} />
+
+        <Route path ="/teste" component={Teste} />
 
         <Route exact path="/" render={(props) => <Home {...props} />} />
 

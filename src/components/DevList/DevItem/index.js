@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "./index.css";
 
 const DevItem = ({ onSelect, photo, name, expertise }) => {
+  console.log('item')
   return (
     <li className="devitem-container" onClick={onSelect}>
       {photo && <img className="devitem-photo" src={photo} alt={name} />}
