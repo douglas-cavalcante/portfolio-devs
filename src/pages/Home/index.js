@@ -70,30 +70,6 @@ class Home extends React.Component {
     return (
       <>
 
-        <table>
-          <thead>
-            <tr>
-              <td>Cliente</td>
-              <td>Dados confirmados</td>
-              <td>reunião agendada</td>
-            </tr>
-          </thead>
-          <tbody>
-
-
-            {
-              this.state.devsList.map(item => (
-                <tr>
-                  <td>{item.name}</td>
-                  <td>{item.expertise}</td>
-                  <td>12:00</td>
-                </tr>
-              ))
-            }
-
-
-          </tbody>
-        </table>
 
         {/* Header */}
         <Header title="DEVS">
