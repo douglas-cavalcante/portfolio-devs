@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Selector from '../../components/Selector'
 import SelectorMultiple from "../../components/SelectorMultiple";
 
@@ -55,6 +55,21 @@ const Form = () => {
     if (optionColor.length === 2) return
     setColorFavorite([...optionColor, value])
   }
+
+  useEffect(()=> {
+    console.log('to executando toda vez')
+  })
+
+  useEffect(() => {
+     console.log('executei a primeira vez')
+  }, [])
+
+  useEffect(() => {
+    console.log('entrei')
+    if(password.length > 8) {
+      setPassword('')
+    }
+  }, [password])
 
   return (
     <div className="content">

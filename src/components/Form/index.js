@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Form = () => {
 
@@ -6,14 +6,12 @@ const Form = () => {
   const [lastname, setLastname] = useState("");
   const [expertise, setExpertise] = useState("");
   const [email, setEmail] = useState("");
-  const [expertises, setExpertises] = useState([
-    'React Developer',
-    'Full Stack'
-  ]);
+  const [expertises, setExpertises] = useState([]);
+  const [message, setMessage] = useState('')
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+
     if (!name) {
       alert('Nome é obrigatório')
       return;
@@ -33,8 +31,34 @@ const Form = () => {
     console.log("handleSubmit");
   };
 
+  // variacao 1
+  
+  useEffect(() => {
+
+    async function getExpertises() {
+      const result = await fetch("http://localhost:3333/expertises");
+      const data = await result.json();
+      console.log(data);
+      setExpertises(data);
+    }
+
+    getExpertises();
+
+  }, []);
+
+  // variacao 2
+  useEffect(() => {
+    if(expertise === 'Java Developer') {
+     setMessage(':)')
+    } else {
+      setMessage(':(')
+    }
+  }, [expertise]);
+
   return (
     <form onSubmit={handleSubmit}>
+
+      {message}
       <label>
         Nome:
         <input

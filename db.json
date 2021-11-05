@@ -1,39 +1,11 @@
 {
+  "expertises": [
+    "React Developer",
+    "Java Developer",
+    "Vue Developer",
+    "Javascript Developer"
+  ],
   "devs": [
-    {
-      "gender": "female",
-      "name": { "title": "Mrs", "first": "Esperanza", "last": "Caballero" },
-      "location": {
-        "street": { "number": 7921, "name": "Calle de La Almudena" },
-        "city": "Gandía",
-        "state": "Comunidad de Madrid",
-        "country": "Spain",
-        "postcode": 84232,
-        "coordinates": { "latitude": "-20.9348", "longitude": "92.8060" },
-        "timezone": { "offset": "+9:30", "description": "Adelaide, Darwin" }
-      },
-      "email": "esperanza.caballero@example.com",
-      "login": {
-        "uuid": "516ec748-d722-4dd7-8df6-d3e3cb612eb4",
-        "username": "happyswan298",
-        "password": "victor",
-        "salt": "BjlZYEqZ",
-        "md5": "fec3a5b5c5973b4a06466824e69374fd",
-        "sha1": "87e7aa7cea467f4409223cc9bf5b6a55bc75e0a5",
-        "sha256":
-          "0f2ad08ed22c6dd83ed82a1277861a595da453149e66b34bb2f142a973fbf2b9"
-      },
-      "dob": { "date": "1994-05-06T14:20:42.314Z", "age": 27 },
-      "registered": { "date": "2006-07-03T17:41:36.975Z", "age": 15 },
-      "phone": "974-118-725",
-      "cell": "669-516-770",
-      "id": { "name": "DNI", "value": "41942506-J" },
-      "picture": {
-        "large": "https://randomuser.me/api/portraits/women/74.jpg",
-        "medium": "https://randomuser.me/api/portraits/med/women/74.jpg",
-        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/74.jpg"
-      },
-      "nat": "ES"
-    }
+    
   ]
 }
