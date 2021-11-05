@@ -36,12 +36,15 @@ class Home extends React.Component {
   async componentDidMount() {
     console.log("componentDidMount");
 
-    const response = await fetch("/api/users");
-    const responseInfo = await fetch("/api/info");
-    const data = await response.json();
-    const dataInfo = await responseInfo.json();
+    const response = await fetch("http://localhost:3333/devs");
+   
+   // const responseInfo = await fetch("/api/info");
 
-    const devsList = data.results.map((result) => {
+    const data = await response.json();
+
+    //const dataInfo = await responseInfo.json();
+
+    const devsList = data.map((result) => {
       return {
         name: `${result.name.first} ${result.name.last}`,
         photo: result.picture.thumbnail,
@@ -49,14 +52,16 @@ class Home extends React.Component {
       };
     });
 
+    console.log(devsList)
+
     this.listData = devsList;
 
     this.setState({
       isLoading: false,
       devsList,
       info: {
-        title: dataInfo.title,
-        description: dataInfo.description,
+        title: '',
+        description: '',
       },
     });
   }
