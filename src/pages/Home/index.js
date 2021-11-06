@@ -1,119 +1,85 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Search from "../../components/Search";
 import DevList from "../../components/DevList";
 import DevItem from "../../components/DevList/DevItem";
 import SubHeader from "../../components/SubHeader";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
 
-class Home extends React.Component {
-  constructor(props) {
-    super(props);
+const Home = () => {
 
-    this.state = {
-      isLoading: true,
-      devsList: [],
-      info: {
-        title: "",
-        description: "",
-      },
-    };
+  const history = useHistory();
 
-    this.listData = [];
-  }
+  const [isLoading, setLoading] = useState(true);
+  const [devsList, setDevsList] = useState([]);
+  const [listData, setListData] = useState([]);
 
-  handleChange = (evt) => {
+  const handleChange = (evt) => {
     const text = evt.target.value;
-    console.log(text);
 
-    const resultFilter = this.listData.filter((dev) => {
-      return dev.name.includes(text);
+    const resultFilter = listData.filter((dev) => {
+      const name = dev.name.toLowerCase();
+      return name.includes(text.toLowerCase());
     });
 
-    this.setState({ devsList: resultFilter });
+    setDevsList(resultFilter);
   };
 
-  async componentDidMount() {
-    console.log("componentDidMount");
-
-    const response = await fetch("http://localhost:3333/devs");
-   
-   // const responseInfo = await fetch("/api/info");
-
-    const data = await response.json();
-
-    //const dataInfo = await responseInfo.json();
-
-    const devsList = data.map((result) => {
-      return {
-        name: `${result.name.first} ${result.name.last}`,
-        photo: result.picture.thumbnail,
-        expertise: result.email,
-      };
-    });
-
-    console.log(devsList)
-
-    this.listData = devsList;
-
-    this.setState({
-      isLoading: false,
-      devsList,
-      info: {
-        title: '',
-        description: '',
-      },
-    });
-  }
-
-  goToPerfil = (dev) => {
-    this.props.history.push("/perfil", { dev });
+  const goToPerfil = (dev) => {
+    history.push("/perfil", { dev });
   };
 
-  render() {
-    console.log("render");
-    return (
-      <>
+  useEffect(() => {
+    async function handleGetDevs() {
+      try {
+        const response = await fetch("http://localhost:3333/devs");
+        const data = await response.json();
+
+        setListData(data);
+        setDevsList(data);
+        setLoading(false);
+      } catch (error) {
+        alert('Houve um erro ao tentar listar os devs. Entre em contato com suporte.')
+      }
+    }
+    handleGetDevs();
+  }, []);
+
+  return (
+    <>
 
 
-        {/* Header */}
-        <Header title="DEVS">
-          <Link to="/register">
-            <button>Criar</button>
-          </Link>
-        </Header>
+      {/* Header */}
+      <Header title="DEVS">
+        <Link to="/register">
+          <button>Criar</button>
+        </Link>
+      </Header>
 
-        {/* SubHeader */}
-        <SubHeader
-          title={this.state.info.title}
-          description={this.state.info.description}
-        />
-        {/* Search */}
-        <Search onChange={this.handleChange} />
-        {/* List */}
-        {this.state.isLoading && "Loading.."}
-        {!this.state.isLoading && (
-          <DevList>
-            {this.state.devsList.map((dev) => (
-              // <Link
-              //   to={{
-              //     pathname: "/perfil",
-              //     state: { dev },
-              //   }}
-              // >
-              <DevItem
-                name={dev.name}
-                photo={dev.photo}
-                expertise={dev.expertise}
-                onSelect={() => this.goToPerfil(dev)}
-              />
-              // </Link>
-            ))}
-          </DevList>
-        )}
-      </>
-    );
-  }
+      {/* SubHeader */}
+      <SubHeader
+        title="Home"
+        description="Tela de boas vindas"
+      />
+      {/* Search */}
+      <Search onChange={handleChange} />
+      {/* List */}
+      {isLoading && "Loading.."}
+      {!isLoading && (
+        <DevList>
+          {devsList.map((dev) => (
+            <DevItem
+              name={dev.name}
+              email={dev.email}
+              favoriteAnimal={dev.favorite_animal}
+              onSelect={() => goToPerfil(dev)}
+            />
+          ))}
+        </DevList>
+      )}
+    </>
+  );
 }
 
 export default Home;

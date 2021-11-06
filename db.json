@@ -6,6 +6,14 @@
     "Javascript Developer"
   ],
   "devs": [
-    
+    {
+      "name": "Henrique Douglas",
+      "favorite_animal": "CAT",
+      "email": "henrique.costa@gmail.com",
+      "password": "12345678",
+      "observation": "Pelo Senai",
+      "state": "CE",
+      "id": 1
+    }
   ]
 }

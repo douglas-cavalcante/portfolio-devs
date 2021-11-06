@@ -43,5 +43,14 @@ select {
    border: 1px solid tomato;
    padding: 2px;
    border-radius: 5px;
-   color: #999
+   color: #999;
+}
+
+.btn {
+  background-color: tomato ;
+  margin: 10px 0;
+  border: 0;
+  border-radius: 5px;
+  color: #FFF;
+  height: 25px;
 }

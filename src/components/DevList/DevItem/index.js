@@ -2,15 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./index.css";
 
-const DevItem = ({ onSelect, photo, name, expertise }) => {
+const DevItem = ({ onSelect, email, favoriteAnimal, name }) => {
   console.log('item')
   return (
     <li className="devitem-container" onClick={onSelect}>
-      {photo && <img className="devitem-photo" src={photo} alt={name} />}
-
+      
       <div>
-        <p className="devitem-name">{name}</p>
-        <p className="devitem-expertise">{expertise}</p>
+      <p className="devitem-name">Nome: {name}</p>
+        <p className="devitem-name">Email: {email}</p>
+        <p className="devitem-name">Favorito: {favoriteAnimal}</p>
       </div>
     </li>
   );

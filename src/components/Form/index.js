@@ -17,7 +17,7 @@ const Form = () => {
       return;
     } else if (!name.match(/^[a-zA-Z]/)) {
       alert("Nome de conter somente letras")
-      return
+      return;
     } else if (!lastname) {
       alert('Sobrenome é obrigatório')
       return;
@@ -32,7 +32,7 @@ const Form = () => {
   };
 
   // variacao 1
-  
+
   useEffect(() => {
 
     async function getExpertises() {
@@ -48,8 +48,8 @@ const Form = () => {
 
   // variacao 2
   useEffect(() => {
-    if(expertise === 'Java Developer') {
-     setMessage(':)')
+    if (expertise === 'Java Developer') {
+      setMessage(':)')
     } else {
       setMessage(':(')
     }
@@ -57,7 +57,6 @@ const Form = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-
       {message}
       <label>
         Nome:

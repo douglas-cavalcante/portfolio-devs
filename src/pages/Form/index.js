@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Selector from '../../components/Selector'
-import SelectorMultiple from "../../components/SelectorMultiple";
+import { useHistory } from 'react-router-dom';
 
 const UF = [
   { value: 'AC', label: 'Acre' },
@@ -30,9 +30,11 @@ const UF = [
   { value: 'SP', label: 'São Paulo' },
   { value: 'SE', label: 'Sergipe' },
   { value: 'TO', label: 'Tocantins' },
-]
+];
 
 const Form = () => {
+
+  const history = useHistory();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -41,7 +43,6 @@ const Form = () => {
   const [observation, setObservation] = useState('');
   const [uf, setUf] = useState('');
   const [optionAnimal, setOptionAnimal] = useState('');
-  const [optionColor, setColorFavorite] = useState([]);
 
   const handleChangeOptionAnimal = (value) => {
     if (value === optionAnimal) {
@@ -51,30 +52,98 @@ const Form = () => {
     }
   }
 
+  /*
   const handleChangeOptionColor = (value) => {
     if (optionColor.length === 2) return
     setColorFavorite([...optionColor, value])
   }
+  */
 
-  useEffect(()=> {
+  const handleSubmit = async (event) => {
+    try {
+
+      event.preventDefault();
+
+      if (!name) {
+        alert('Nome é obrigatório.');
+        return
+      } else if (!email) {
+        alert('Email é obrigatório.');
+        return
+      } else if (password.length < 8) {
+        alert('A senha é muito pequena.');
+        return
+      } else if (password !== confirmPassword) {
+        alert('As senhas devem ser iguais.');
+        return
+      } else if (!observation) {
+        alert('Observação é obrigatório.');
+        return
+      } else if (!uf) {
+        alert('UF é obrigatório.');
+        return
+      } else if (!optionAnimal) {
+        alert('Animal favorito é obrigatório.');
+        return
+      }
+
+      // GET - Listar dados e filtrar
+      // POST - Cadastrar algum dado
+      // PUT - Atualizar algum dado
+      // DELETE - Delete algum dado
+
+      await fetch(
+        'http://localhost:3333/devs',
+        {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: "POST",
+          body: JSON.stringify({
+            "name": name,
+            "favorite_animal": optionAnimal,
+            "email": email,
+            "password": password,
+            "observation": observation,
+            "state": uf
+          })
+        }
+      );
+
+      alert('Dev cadastrado com sucesso');
+
+      // Redireciona para tela inicial
+
+      history.push("/");
+
+    } catch (error) {
+      alert('Desculpe o transtorno. Estamos resolvendo o problema !')
+    }
+  }
+
+  /*
+  useEffect(() => {
     console.log('to executando toda vez')
   })
 
   useEffect(() => {
-     console.log('executei a primeira vez')
+    console.log('executei a primeira vez')
   }, [])
 
   useEffect(() => {
     console.log('entrei')
-    if(password.length > 8) {
-      setPassword('')
+    if (password.length > 8) {
+      // setPassword('')
     }
   }, [password])
+
+  */
 
   return (
     <div className="content">
 
-      <div className="container-form">
+      <form className="container-form" onSubmit={handleSubmit}>
 
         <h1>Formulário de cadastro</h1>
 
@@ -83,6 +152,7 @@ const Form = () => {
           placeholder="Nome"
           value={name}
           onChange={(event) => setName(event.target.value)}
+
         />
 
         <Selector
@@ -90,17 +160,6 @@ const Form = () => {
           onChange={handleChangeOptionAnimal}
           value={optionAnimal}
         />
-
-        {
-          /*
- 
-        <SelectorMultiple
-           options={['red', 'green', 'black', 'yellow']}
-           onChange={handleChangeOptionColor}
-           values={optionColor}
-         />
-          */
-        }
 
         <input
           type="text"
@@ -138,8 +197,20 @@ const Form = () => {
           {UF.map(state => <option value={state.value}>{state.label}</option>)}
         </select>
 
-      </div>
+        <button
+          className="btn"
+          type="submit">
+          Salvar
+        </button>
 
+        <button
+          onClick={() => history.push('/')}
+          className="btn"
+          type="button">
+          Cancelar
+        </button>
+
+      </form>
     </div>
   )
 }

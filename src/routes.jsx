@@ -12,11 +12,9 @@ const Router = () => {
       <Switch>
         <Route path="/perfil" component={Perfil} />
 
-        <Route path="/register" children={(props) => <Register {...props} />} />
+        <Route path="/register" component={Form}/>
 
         <Route path ="/teste" component={Teste} />
-
-        <Route path="/form" component={Form} />
 
         <Route exact path="/" render={(props) => <Home {...props} />} />
 
