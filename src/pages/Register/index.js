@@ -4,7 +4,7 @@ import Form from "../../components/Form";
 import Header from "../../components/Header";
 import SubHeader from "../../components/SubHeader";
 
-const Register = ({ history }) => {
+const Register = ({ history, location }) => {
   return (
     <>
       <Header title="Register">

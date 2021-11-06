@@ -6,6 +6,7 @@ import DevItem from "../../components/DevList/DevItem";
 import SubHeader from "../../components/SubHeader";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
+import NewHeader from '../../components/NewHeader';
 
 const Home = () => {
 
@@ -14,6 +15,8 @@ const Home = () => {
   const [isLoading, setLoading] = useState(true);
   const [devsList, setDevsList] = useState([]);
   const [listData, setListData] = useState([]);
+
+  const [search, setSearch] = useState('')
 
   const handleChange = (evt) => {
     const text = evt.target.value;
@@ -46,8 +49,40 @@ const Home = () => {
     handleGetDevs();
   }, []);
 
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const text = search;
+    
+    const resultFilter = listData.filter((dev) => {
+      const name = dev.name.toLowerCase();
+      return name.includes(text.toLowerCase());
+    });
+
+    setDevsList(resultFilter);
+  }
+
   return (
     <>
+
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            devsList.map((item) => (
+              <tr>
+                <td>{item.name}</td>
+                <td><button onClick={() => history.push('/register', { item })}>Mais info</button></td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
 
 
       {/* Header */}
@@ -64,6 +99,22 @@ const Home = () => {
       />
       {/* Search */}
       <Search onChange={handleChange} />
+
+
+      <form onSubmit={handleSubmit}>
+        <div className="searchBar">
+          <input
+            type="text"
+            value={search}
+            placeholder="Pesquise..."
+            onChange={(event) => setSearch(event.target.value)}
+          />
+        </div>
+      </form>
+
+
+
+      <button onClick={() => history.push('/register')}>Adicionar outro dev</button>
       {/* List */}
       {isLoading && "Loading.."}
       {!isLoading && (

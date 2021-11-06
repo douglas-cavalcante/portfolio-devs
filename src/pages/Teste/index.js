@@ -8,20 +8,39 @@ class Teste extends React.Component {
   }
 }
 */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Teste = () => {
 
-  const [amount, setAmount] = useState(0)
-  const [amountTwo, setAmountTwo] = useState(10)
+  const [cards, setCards] = useState([])
+
+  useEffect(() => {
+    async function handleGetCards() {
+      const response = await fetch('https://db.ygoprodeck.com/api/v7/cardinfo.php?cardset=metal%20raiders&num=45&offset=0')
+      const result = await response.json();
+      console.log(result.data)
+      setCards(result.data)
+    }
+
+    handleGetCards();
+  }, [])
 
   return (
     <>
-      <div>{amount}</div>
-      <button onClick={() => setAmount(amount + 1)}>Adicionar</button>
-      <hr />
-      <div>{amountTwo}</div>
-      <button onClick={() => setAmountTwo(amountTwo + 1)}>Adicionar</button>
+    <div className="container-cards">
+      {cards.map(card => (
+        <div className="item-card">
+          <img 
+           src={card.card_images[0].image_url_small} 
+           alt="capa da carta" 
+           width="100px"
+           height="100px"
+           style={{objectFit: 'contain'}}
+           />
+          <span>{card.name}</span>
+        </div>
+      ))}
+      </div>
     </>
   )
 }

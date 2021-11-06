@@ -54,3 +54,52 @@ select {
   color: #FFF;
   height: 25px;
 }
+
+.navbar {
+  background-color: tomato;
+  height: 54px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+
+.navbar-item {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  color: #FFF;
+  font-weight: bold;
+}
+
+
+.container-cards {
+  display: flex;
+  flex-wrap: wrap;
+  
+
+  margin: 0 auto;
+  width: 90%;
+  gap: 20px;
+
+}
+
+.item-card {
+  border: 1px solid #999;
+
+  background: red;
+
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  gap: 10px;
+
+  height: 100px;
+
+  max-width: 200px;
+  min-width: 200px;
+
+
+}

@@ -5,10 +5,13 @@ import Teste from './pages/Teste';
 import Form from './pages/Form';
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import NewHeader from "./components/NewHeader";
 
 const Router = () => {
   return (
     <BrowserRouter>
+     <NewHeader />
+
       <Switch>
         <Route path="/perfil" component={Perfil} />
 
@@ -22,6 +25,8 @@ const Router = () => {
           <input placeholder="Say Hello!"></input>
         </Route>
       </Switch>
+
+
     </BrowserRouter>
   );
 };

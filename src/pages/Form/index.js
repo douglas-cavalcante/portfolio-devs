@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Selector from '../../components/Selector'
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation} from 'react-router-dom';
 
 const UF = [
   { value: 'AC', label: 'Acre' },
@@ -32,9 +32,13 @@ const UF = [
   { value: 'TO', label: 'Tocantins' },
 ];
 
-const Form = () => {
+const Form = (props) => {
 
+ 
   const history = useHistory();
+ // const location = useLocation();
+
+
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -143,10 +147,14 @@ const Form = () => {
   return (
     <div className="content">
 
+  
+
+
       <form className="container-form" onSubmit={handleSubmit}>
 
         <h1>Formulário de cadastro</h1>
 
+       
         <input
           type="text"
           placeholder="Nome"

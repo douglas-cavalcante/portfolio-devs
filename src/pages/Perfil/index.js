@@ -3,7 +3,12 @@ import Header from "../../components/Header";
 import DevItem from "../../components/DevList/DevItem";
 import { Link } from "react-router-dom";
 
-const Perfil = (props) => {
+import {useLocation} from 'react-router-dom'
+
+const Perfil = () => {
+  
+  const location = useLocation();
+  console.log(location.state.dev)
   return (
     <>
       {/*Header*/}
@@ -15,7 +20,7 @@ const Perfil = (props) => {
           <button>Início</button>
         </Link>
       </Header>
-      <DevItem {...props.location.state.dev} />
+      <DevItem {...location.state.dev} />
     </>
   );
 };
